@@ -13,7 +13,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged --allow-empty"
     }
   },
   "lint-staged": {
@@ -21,5 +21,9 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "scripts": {
+    "front": "lerna run dev --scope=front --parallel",
+    "dev": "lerna run dev --parallel"
   }
 }
