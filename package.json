@@ -9,7 +9,7 @@
     "prettier": "^2.2.1"
   },
   "workspaces": [
-    "apps/*"
+    "packages/*"
   ],
   "husky": {
     "hooks": {
@@ -17,7 +17,7 @@
     }
   },
   "lint-staged": {
-    "apps/**/*.{js, jsx}": [
+    "packages/**/*.{js, jsx}": [
       "prettier --write",
       "git add"
     ]
