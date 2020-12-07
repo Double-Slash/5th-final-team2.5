@@ -3,6 +3,8 @@
   "private": true,
   "devDependencies": {
     "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^3.2.0",
     "husky": "^4.3.4",
     "lerna": "^3.22.1",
     "lint-staged": "^10.5.3",
@@ -23,7 +25,9 @@
     ]
   },
   "scripts": {
-    "front": "lerna run dev --scope=front --parallel",
+    "bootstrap": "yarn install; lerna bootstrap",
+    "package:front": "lerna run dev --scope=dodam --stream",
+    "package:server": "lerna run dev --scope=dodam-server",
     "dev": "lerna run dev --parallel"
   }
 }

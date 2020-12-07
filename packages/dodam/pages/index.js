@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div className="title">
-      Hello
+      Dodam Dodam
       <style jsx>{`
         .title {
           font-weight: bold;

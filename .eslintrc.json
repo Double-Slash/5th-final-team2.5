@@ -7,7 +7,6 @@
   "parser": "babel-eslint",
   "extends": [
     "eslint:recommended",
-    "airbnb",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
