@@ -25,9 +25,10 @@
     ]
   },
   "scripts": {
-    "bootstrap": "yarn install; lerna bootstrap",
+    "bootstrap": "npm install && lerna bootstrap",
     "package:front": "lerna run dev --scope=dodam --stream",
     "package:server": "lerna run dev --scope=dodam-server --stream",
-    "dev": "lerna run dev --parallel"
+    "dev": "lerna run dev --parallel",
+    "te": "lerna bootstrap --hoist"
   }
 }
