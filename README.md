@@ -4,17 +4,17 @@
 
 ```bash
 # 디펜던시 설치
-$ yarn bootstrap
+$ npm run bootstrap
 
 # front 시작
 # http://localhost:3000/
-$ yarn run package:front 
+$ npm run package:front 
 
 # server 시작
 # http://localhost:8080/
-$ yarn run package:server
+$ npm run package:server
 
 # front & server 시작
-$ yarn run dev
+$ npm run dev
 
 ```
