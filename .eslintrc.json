@@ -5,12 +5,7 @@
     "node": true
   },
   "parser": "babel-eslint",
-  "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "airbnb",
-    "plugin:react/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:react/recommended", "airbnb", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -31,7 +26,8 @@
     "react/jsx-one-expression-per-line": "off",
     "no-nested-ternary": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   },
   "globals": {
     "React": "writable"
