@@ -1,3 +1,3 @@
-const Button = () => <button type="button">Button</button>;
-
-export default Button;
+export default function Button() {
+  return <button type="button">test</button>;
+}
