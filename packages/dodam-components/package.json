@@ -1,5 +1,5 @@
 {
-  "name": "dodam-components",
+  "name": "@dodam/components",
   "version": "0.0.1",
   "description": "",
   "main": "index.ts",
@@ -8,9 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  }
+  "license": "ISC"
 }
