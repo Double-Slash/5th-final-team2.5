@@ -1,5 +1,5 @@
-function MyApp({ Component, pageProps }) {
+function Dodam({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default Dodam;
