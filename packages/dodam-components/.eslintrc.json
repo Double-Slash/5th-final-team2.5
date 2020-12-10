@@ -4,6 +4,7 @@
     "airbnb",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint"
@@ -22,7 +23,16 @@
     "react/jsx-one-expression-per-line": "off",
     "no-nested-ternary": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/extensions": [
+      "error",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never"
+      }
+    ]
   },
   "overrides": [
     {
