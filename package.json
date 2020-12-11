@@ -36,8 +36,8 @@
   },
   "scripts": {
     "bootstrap": "yarn install && lerna bootstrap",
-    "package:front": "lerna run dev --scope=dodam --stream",
-    "package:server": "lerna run dev --scope=dodam-server --stream",
+    "package:front": "lerna run dev --scope=@dodam/web --stream",
+    "package:server": "lerna run dev --scope=@dodam/server --stream",
     "dev": "lerna run dev --parallel"
   }
 }
