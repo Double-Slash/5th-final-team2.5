@@ -29,7 +29,8 @@
     }
   },
   "lint-staged": {
-    "packages/**/*.{js, jsx}": [
+    "packages/**/*.{js, jsx, ts, tsx}": [
+      "lerna run test --parallel",
       "prettier --write",
       "git add"
     ]

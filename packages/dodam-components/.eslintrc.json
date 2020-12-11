@@ -42,6 +42,12 @@
       "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
       }
+    },
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        "no-undef": "off"
+      }
     }
   ],
   "ignorePatterns": ["@types/"]
