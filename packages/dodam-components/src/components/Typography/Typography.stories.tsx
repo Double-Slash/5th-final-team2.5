@@ -14,5 +14,17 @@ const Template: Story<TypographyProps> = (args) => (
   </Typography>
 );
 
-export const TypographyComponent = Template.bind({});
-TypographyComponent.args = {};
+const defaultParams = {
+  align: 'left',
+  variant: 'p',
+  weight: 'normal',
+};
+
+export const Default = Template.bind({});
+Default.args = defaultParams;
+
+export const Heading = Template.bind({});
+Heading.args = {
+  ...defaultParams,
+  variant: 'h5',
+};
