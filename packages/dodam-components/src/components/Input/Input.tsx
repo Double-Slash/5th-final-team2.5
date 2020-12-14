@@ -2,15 +2,17 @@ import React from 'react';
 import classNames from 'classnames';
 import Typography from '../Typography';
 
+// TODO: 아이콘 입력허용
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder?: string;
   error?: string;
   message?: string;
+  icon?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { label, placeholder, id, name, error, message, ...rest } = props;
+  const { label, placeholder, id, name, error, message, icon, ...rest } = props;
 
   return (
     <div className="input-root">
@@ -33,6 +35,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         </Typography>
       </div>
 
+      {/* TODO: svg를 사용할수도 있음 */}
+      {icon && <img alt="" className="icon" />}
       <style jsx global>
         {`
           .input-root {
@@ -65,6 +69,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             color: #bbbbbb;
             font-size: 14px;
             transition: color 0.3s ease;
+          }
+
+          .input-root .icon {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            right: 8px;
+            bottom: 50%;
+            background-color: black;
+            transform: translate(0, 50%);
           }
 
           .input-root .message-wrapper {
