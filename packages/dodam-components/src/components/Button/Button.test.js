@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Primary as Button } from './Button.stories';
+import Button from './Button';
 
 describe('<Button>', () => {
   it('버튼을 생성한다.', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { TypographyComponent as Typography } from './Typography.stories';
+import Typography from './Typography';
 
 describe('<Typography />', () => {
   it('Typography를 생성한다', () => {
@@ -18,10 +18,10 @@ describe('<Typography />', () => {
   });
 
   it('align을 설정할 수 있다.', () => {
-    const componentClasses = mount(<Typography align="right" />)
+    const component = mount(<Typography align="right" />)
       .find('p')
-      .getDOMNode().className;
+      .getDOMNode();
 
-    expect(componentClasses).toContain('text-end');
+    expect(component.className).toContain('text-end');
   });
 });
