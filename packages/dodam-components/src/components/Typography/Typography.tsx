@@ -49,7 +49,7 @@ const Typography = React.forwardRef<TypographyRefs, TypographyProps>((props, ref
       <style jsx>
         {`
           .typography {
-            margin: 0.5rem;
+            margin: 8px;
           }
           .typography-inline {
             display: inline-block;

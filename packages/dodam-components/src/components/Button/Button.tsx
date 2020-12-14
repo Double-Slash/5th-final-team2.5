@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   size?: 'small' | 'large';
   variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning';

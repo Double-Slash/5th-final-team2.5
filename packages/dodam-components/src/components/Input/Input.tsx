@@ -6,7 +6,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { label, placeholder, id = Math.random().toString(), ...rest } = props;
+  const { label, placeholder, id, ...rest } = props;
 
   return (
     <div className="input-root">
@@ -17,7 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       )}
       <input ref={ref} name="temp-box" id={id} className="input-field" placeholder={placeholder} {...rest} />
 
-      <style jsx global>
+      <style jsx>
         {`
           .input-root {
             position: relative;

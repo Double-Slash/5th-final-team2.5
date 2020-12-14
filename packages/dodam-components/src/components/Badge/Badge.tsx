@@ -5,7 +5,7 @@ import Typography, { TypographyProps } from '../Typography';
 export interface BadgeProps extends React.HTMLAttributes<HTMLElement>, Omit<TypographyProps, 'variant' | 'align'> {
   size?: 'small' | 'large' | 'larger';
   rounded?: boolean;
-  color?: 'primary' | 'secondar' | 'danger' | 'success' | 'warning';
+  color?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning';
 }
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
@@ -19,16 +19,16 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
       <style jsx global>
         {`
           .badge {
-            padding: 0.5rem;
+            padding: 8px;
           }
           .badge-small {
-            font-size: 0.6rem;
+            font-size: 10px;
           }
           .badge-large {
-            font-size: 0.9rem;
+            font-size: 14px;
           }
-          .badge-large {
-            font-size: 1rem;
+          .badge-larger {
+            font-size: 16px;
           }
         `}
       </style>
