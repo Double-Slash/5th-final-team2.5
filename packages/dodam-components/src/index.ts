@@ -11,3 +11,6 @@ export type { BadgeProps } from './components/Badge';
 
 export { default as Input } from './components/Input';
 export type { InputProps } from './components/Input';
+
+export { default as ProgressBar } from './components/ProgressBar';
+export type { ProgressBarProps } from './components/ProgressBar';
