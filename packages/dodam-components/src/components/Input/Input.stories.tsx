@@ -40,3 +40,14 @@ WithGrid.args = {
   label: 'email',
   placeholder: 'placeholder',
 };
+
+const FormTemplate: Story<InputProps> = () => (
+  <div className="container">
+    <Input type="text" label="아이디" value="abcd1234" message="사용 가능한 아이디입니다." />
+    <Input type="password" label="비밀번호" value="abcd1234" />
+    <Input type="password" label="비밀번호 확인" message="비밀번호가 일치합니다." value="abcd1234" />
+    <Input type="text" label="이름" value="abcd1234" />
+  </div>
+);
+
+export const FormExample = FormTemplate.bind({});

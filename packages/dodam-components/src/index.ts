@@ -8,3 +8,6 @@ export type { TypographyProps } from './components/Typography';
 
 export { default as Badge } from './components/Badge';
 export type { BadgeProps } from './components/Badge';
+
+export { default as Input } from './components/Input';
+export type { InputProps } from './components/Input';

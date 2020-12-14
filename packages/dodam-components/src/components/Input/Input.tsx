@@ -1,33 +1,48 @@
 import React from 'react';
+import classNames from 'classnames';
+import Typography from '../Typography';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder?: string;
+  error?: string;
+  message?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { label, placeholder, id, ...rest } = props;
+  const { label, placeholder, id, name, error, message, ...rest } = props;
 
   return (
     <div className="input-root">
       {label && (
-        <label htmlFor={id} className="input-label">
+        <label htmlFor={id} className={classNames('label', Boolean(error) && 'label-error')}>
           {label}
         </label>
       )}
-      <input ref={ref} name="temp-box" id={id} className="input-field" placeholder={placeholder} {...rest} />
+      <input
+        className={classNames('field', Boolean(error) && 'input-error')}
+        ref={ref}
+        name={name}
+        id={id}
+        placeholder={placeholder}
+        {...rest}
+      />
+      <div className="message-wrapper">
+        <Typography className={classNames(error ? 'error' : 'message')} align="right">
+          {error || message}
+        </Typography>
+      </div>
 
-      <style jsx>
+      <style jsx global>
         {`
           .input-root {
             position: relative;
-            padding: 8px 0 0;
-            margin-top: 4px;
+            padding: 8px 0;
           }
-          .input-root:focus-within > .input-label {
+          .input-root:focus-within > .label {
             color: #0d6efd;
           }
-          .input-field {
+          .input-root .field {
             font-family: inherit;
             width: 100%;
             border: 0;
@@ -39,17 +54,39 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             transition: border-bottom-color 0.3s ease;
             font-size: 1rem;
           }
-          .input-field::placeholder {
+          .input-root .field::placeholder {
             color: #bbbbbb;
           }
-          .input-field:focus {
+          .input-root .field:focus {
             border-bottom: 2px solid #0d6efd;
             padding-bottom: 4px;
           }
-          .input-label {
+          .input-root .label {
             color: #bbbbbb;
             font-size: 14px;
             transition: color 0.3s ease;
+          }
+
+          .input-root .message-wrapper {
+            height: 8px;
+          }
+          .input-root .message-wrapper .error {
+            color: #dc3545 !important;
+            font-size: 14px;
+            margin: 0;
+          }
+          .input-root .message-wrapper .message {
+            color: #bbbbbb !important;
+            font-size: 14px;
+            margin: 0;
+          }
+
+          .input-root .label-error {
+            color: #dc3545 !important;
+          }
+          .input-root .input-error {
+            border-bottom: 2px solid #dc3545 !important;
+            padding-bottom: 4px;
           }
         `}
       </style>
