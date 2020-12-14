@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Button from './Button';
 
-describe('<Button>', () => {
+describe('<Button />', () => {
   it('버튼을 생성한다.', () => {
     const component = mount(<Button />).find('button');
 
