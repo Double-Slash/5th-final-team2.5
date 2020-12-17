@@ -14,3 +14,6 @@ export type { InputProps } from './components/Input';
 
 export { default as ProgressBar } from './components/ProgressBar';
 export type { ProgressBarProps } from './components/ProgressBar';
+
+export { default as InputBox } from './components/InputBox';
+export type { InputBoxProps } from './components/InputBox';
