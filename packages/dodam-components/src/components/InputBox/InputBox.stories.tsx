@@ -7,15 +7,6 @@ export default {
   component: InputBox,
 } as Meta;
 
-const Template: Story<InputBoxProps> = (args) => (
-  <>
-    <InputBox {...args} />
-    <InputBox {...args} />
-  </>
-);
+const Template: Story<InputBoxProps> = (args) => <InputBox {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  label: '동아리 이름',
-  required: true,
-};
