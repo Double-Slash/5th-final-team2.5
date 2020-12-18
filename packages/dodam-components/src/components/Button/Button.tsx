@@ -1,17 +1,34 @@
 import React from 'react';
 import classNames from 'classnames';
 
+type buttonSizes = 'small' | 'medium' | 'large';
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
-  size?: 'small' | 'large';
+  size?: buttonSizes;
   variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning';
   disabled?: boolean;
   outline?: boolean;
   type?: 'button' | 'reset' | 'submit';
 }
 
+const prefixSize = (size: buttonSizes) => {
+  if (size === 'small') return 'sm';
+  if (size === 'medium') return 'md';
+  return 'lg';
+};
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, outline, fullWidth, children, size, variant = 'primary', type = 'button', ...rest } = props;
+  const {
+    className,
+    outline,
+    fullWidth,
+    children,
+    size = 'medium',
+    variant = 'primary',
+    type = 'button',
+    ...rest
+  } = props;
   const prefix = 'btn';
 
   const classes = classNames(
@@ -19,8 +36,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
     prefix,
     outline ? `${prefix}-outline-${variant}` : `${prefix}-${variant}`,
     fullWidth && 'w-100',
-    size === 'large' && `${prefix}-lg`,
-    size === 'small' && `${prefix}-sm`
+    `${prefix}-${prefixSize(size)}`
   );
 
   return (
@@ -31,8 +47,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
       <style jsx>
         {`
           .btn {
-            height: 46px;
             border-radius: 0;
+          }
+          .btn-md {
+            height: 46px;
+          }
+          .btn-sm {
+            height: 40px;
+          }
+          .btn-height {
+            height: ∂;
           }
         `}
       </style>

@@ -4,7 +4,7 @@ import Check, { CheckProps } from './Check';
 
 export default {
   title: 'Check',
-  compoennt: Check,
+  component: Check,
 } as Meta;
 
 const Template: Story<CheckProps> = (args) => <Check {...args} />;

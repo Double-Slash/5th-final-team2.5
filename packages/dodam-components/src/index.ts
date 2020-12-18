@@ -23,3 +23,6 @@ export type { FormGroupProps } from './components/FormGroup';
 
 export { default as Check } from './components/Check';
 export type { CheckProps } from './components/Check';
+
+export { default as File } from './components/File';
+export type { FileProps } from './components/File';
