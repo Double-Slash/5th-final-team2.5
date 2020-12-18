@@ -9,8 +9,8 @@ export default {
 
 const Template: Story<FileProps> = () => {
   const handlechange = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line no-console
     // 파일을 불러왔는지 콘솔 로그로 확인
+    // eslint-disable-next-line no-console
     console.log(files[0]);
   };
 
