@@ -21,6 +21,10 @@ const InputBox = React.forwardRef<HTMLInputElement, InputBoxProps>((props, ref) 
         {`
           textarea {
             min-height: 120px;
+            border-radius: 0;
+          }
+          input {
+            border-radius: 0;
           }
         `}
       </style>
