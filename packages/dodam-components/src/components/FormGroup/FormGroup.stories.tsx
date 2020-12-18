@@ -11,7 +11,7 @@ export default {
 
 const Template: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
-    <InputBox type="date" value="date" />
+    <InputBox />
   </FormGroup>
 );
 
