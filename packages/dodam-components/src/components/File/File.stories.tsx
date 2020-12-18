@@ -7,8 +7,10 @@ export default {
   component: File,
 } as Meta;
 
-const Template: Story<FileProps> = (args) => {
+const Template: Story<FileProps> = () => {
   const handlechange = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
+    // eslint-disable-next-line no-console
+    // 파일을 불러왔는지 콘솔 로그로 확인
     console.log(files[0]);
   };
 
