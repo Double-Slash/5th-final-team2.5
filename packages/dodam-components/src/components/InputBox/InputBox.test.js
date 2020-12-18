@@ -5,11 +5,10 @@ import InputBox from './InputBox';
 describe('<InputBox />', () => {
   it('Input과 label을 생성한다.', () => {
     const wrapper = mount(<InputBox label="Label" />);
-
     const label = wrapper.find('label');
+
     expect(label.length).toBe(1);
     expect(label.text()).toBe('Label');
-
     expect(wrapper.find('input').length).toBe(1);
   });
 

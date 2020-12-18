@@ -27,3 +27,6 @@ export type { CheckProps } from './components/Check';
 
 export { default as File } from './components/File';
 export type { FileProps } from './components/File';
+
+export { default as Navigation } from './components/Navigation';
+export type { NavigationProps } from './components/Navigation';
