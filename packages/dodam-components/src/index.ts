@@ -20,3 +20,6 @@ export type { InputBoxProps } from './components/InputBox';
 
 export { default as FormGroup } from './components/FormGroup';
 export type { FormGroupProps } from './components/FormGroup';
+
+export { default as Check } from './components/Check';
+export type { CheckProps } from './components/Check';

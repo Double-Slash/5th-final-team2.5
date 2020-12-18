@@ -1,17 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export interface FormGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {
   required?: boolean;
-  name?: string;
+  name: string;
 }
 
-const FormGroup = React.forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {
+const FormGroup = React.forwardRef<HTMLFieldSetElement, FormGroupProps>((props, ref) => {
   const { required = false, name, children, ...rest } = props;
   const classes = classNames('form-legend', required && 'form-required');
 
   return (
-    <div className="form-group" {...rest} ref={ref}>
+    <fieldset className="form-group" {...rest} ref={ref}>
       {name && <legend className={classes}>{name}</legend>}
       {children}
 
@@ -29,7 +29,7 @@ const FormGroup = React.forwardRef<HTMLDivElement, FormGroupProps>((props, ref) 
           }
         `}
       </style>
-    </div>
+    </fieldset>
   );
 });
 
