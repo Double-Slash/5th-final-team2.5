@@ -10,6 +10,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   disabled?: boolean;
   outline?: boolean;
   type?: 'button' | 'reset' | 'submit';
+  active?: boolean;
 }
 
 const prefixSize = (size: buttonSizes) => {
@@ -27,6 +28,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
     size = 'medium',
     variant = 'primary',
     type = 'button',
+    active = false,
     ...rest
   } = props;
   const prefix = 'btn';
@@ -36,7 +38,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
     prefix,
     outline ? `${prefix}-outline-${variant}` : `${prefix}-${variant}`,
     fullWidth && 'w-100',
-    `${prefix}-${prefixSize(size)}`
+    `${prefix}-${prefixSize(size)}`,
+    active && 'active'
   );
 
   return (

@@ -80,6 +80,12 @@ describe('<Button />', () => {
     expect(btn.className).toContain('w-100');
   });
 
+  it('active props을 전달할 수 있다.', () => {
+    const btn = mount(<Button active />).find('.active');
+
+    expect(btn.length).toBe(1);
+  });
+
   // react 17 adapter에서 ref를 지원하지 않음. 확인필요
   // it('ref을 전달받을 수 있다.', () => {
   //   const ref = React.createRef();
