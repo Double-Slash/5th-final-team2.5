@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '../Typography';
 
-// TODO: 네비게이션에 맞는 이미지 설정할 수 있도록
+// TODO: 네비게이션에 맞는 이미지 설정 + background-color gui에 맞게 수정
 export interface NavigationProps extends React.HTMLAttributes<HTMLHeadElement> {
   title: string;
 }
