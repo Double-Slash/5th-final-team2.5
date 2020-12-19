@@ -4,6 +4,7 @@
     "airbnb",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint"
@@ -20,9 +21,20 @@
     "react/prefer-stateless-function": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-one-expression-per-line": "off",
-    "no-nested-ternary": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-nested-ternary": "off",
+    "no-use-before-define": "off",
+    "import/extensions": [
+      "error",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never"
+      }
+    ]
   },
   "overrides": [
     {
@@ -30,6 +42,13 @@
       "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
       }
+    },
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        "no-undef": "off"
+      }
     }
-  ]
+  ],
+  "ignorePatterns": ["@types/"]
 }

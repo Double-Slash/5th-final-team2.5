@@ -29,7 +29,7 @@
     }
   },
   "lint-staged": {
-    "packages/**/*.{js, jsx}": [
+    "packages/**/*.{js, jsx, ts, tsx}": [
       "prettier --write",
       "git add"
     ]
@@ -38,6 +38,7 @@
     "bootstrap": "yarn install && lerna bootstrap",
     "package:front": "lerna run dev --scope=@dodam/web --stream",
     "package:server": "lerna run dev --scope=@dodam/server --stream",
-    "dev": "lerna run dev --parallel"
+    "dev": "lerna run dev --parallel",
+    "test": "lerna run test --parallel"
   }
 }
