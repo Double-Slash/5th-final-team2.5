@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow, render } from 'enzyme';
 import Input from './Input';
 
 describe('<Input />', () => {
@@ -18,7 +18,7 @@ describe('<Input />', () => {
   it('error와 message를 입력받으면 error만 출력한다.', () => {
     const component = mount(<Input error="error" message="msg" />).find('p');
 
-    expect(component.hasClass('error')).toBeTruthy();
+    expect(component.hasClass('text-danger')).toBeTruthy();
     expect(component.getDOMNode().textContent).toBe('error');
   });
 

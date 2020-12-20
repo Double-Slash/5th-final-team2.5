@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import Typography from '../Typography';
+import useCombinedRef from '../../utils/useCombinedRef';
 
 // TODO: 아이콘 입력허용
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -13,24 +14,38 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { label, placeholder, id, name, error, message, icon, ...rest } = props;
+  const labelRef = useRef(null);
+  const inputRef = useRef(null);
+  const combinedRef = useCombinedRef(ref, inputRef);
+
+  const handleFocus = () => {
+    if (labelRef.current) (labelRef.current as HTMLLabelElement).classList.add('text-primary');
+    (combinedRef.current as HTMLInputElement).classList.add('border-primary');
+  };
+
+  const handleBlur = () => {
+    if (labelRef.current) (labelRef.current as HTMLLabelElement).classList.remove('text-primary');
+    (combinedRef.current as HTMLInputElement).classList.remove('border-primary');
+  };
 
   return (
-    <div className="input-root">
+    <div className="input-root" onFocus={handleFocus} onBlur={handleBlur}>
       {label && (
-        <label htmlFor={id} className={classNames('label', Boolean(error) && 'label-error')}>
+        <label ref={labelRef} htmlFor={id} className={classNames('label', Boolean(error) && 'text-danger')}>
           {label}
         </label>
       )}
       <input
-        className={classNames('field', Boolean(error) && 'input-error')}
-        ref={ref}
+        {...rest}
+        className={classNames('field', Boolean(error) && 'border-danger')}
+        ref={combinedRef}
         name={name}
         id={id}
         placeholder={placeholder}
-        {...rest}
       />
+
       <div className="message-wrapper">
-        <Typography className={classNames(error ? 'error' : 'message')} align="right">
+        <Typography className={classNames(error ? 'text-danger' : 'message')} align="right">
           {error || message}
         </Typography>
       </div>
@@ -43,9 +58,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             position: relative;
             padding: 8px 0;
           }
-          .input-root:focus-within > .label {
-            color: #0d6efd;
-          }
+
           .input-root .field {
             font-family: inherit;
             width: 100%;
@@ -62,8 +75,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             color: #bbbbbb;
           }
           .input-root .field:focus {
-            border-bottom: 2px solid #0d6efd;
             padding-bottom: 4px;
+            border-bottom-width: 2px;
           }
           .input-root .label {
             color: #bbbbbb;
@@ -84,8 +97,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           .input-root .message-wrapper {
             height: 8px;
           }
-          .input-root .message-wrapper .error {
-            color: #dc3545 !important;
+          .input-root .message-wrapper .text-danger {
             font-size: 14px;
             margin: 0;
           }
@@ -95,11 +107,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             margin: 0;
           }
 
-          .input-root .label-error {
-            color: #dc3545 !important;
-          }
-          .input-root .input-error {
-            border-bottom: 2px solid #dc3545 !important;
+          .input-root .border-danger {
+            border-bottom-width: 2px;
             padding-bottom: 4px;
           }
         `}
