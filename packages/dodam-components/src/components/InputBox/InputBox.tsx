@@ -8,7 +8,7 @@ export interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 const InputBox = React.forwardRef<HTMLInputElement, InputBoxProps>((props, ref) => {
-  const { multiline, id, label, type, ...rest } = props;
+  const { multiline, id, label, type = 'text', ...rest } = props;
   const Component = multiline ? 'textarea' : 'input';
 
   if (type === 'date') {
@@ -56,7 +56,7 @@ const InputBox = React.forwardRef<HTMLInputElement, InputBoxProps>((props, ref) 
           {label}
         </label>
       )}
-      <Component id={id} className="form-control" ref={ref} {...rest} />
+      <Component type={type} id={id} className="form-control" ref={ref} {...rest} />
 
       <style jsx>
         {`
