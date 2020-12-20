@@ -31,9 +31,6 @@ const InputBox = React.forwardRef<HTMLInputElement, InputBoxProps>((props, ref) 
             justify-content: center;
             padding: 8px 0;
           }
-          .input-date-wrapper .react-datepicker__tab-loop {
-            position: absolute;
-          }
           .input-date-wrapper .react-datepicker-wrapper {
             flex: 1;
             margin-right: 0px;
