@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import '../src/styles/custom.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const parameters = {
