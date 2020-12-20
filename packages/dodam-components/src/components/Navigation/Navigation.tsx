@@ -41,6 +41,8 @@ const Navigation = React.forwardRef<HTMLHeadElement, NavigationProps>((props, re
             width: 24px;
             background-color: #aaa;
             cursor: pointer;
+            position: absolute;
+            left: 8px;
           }
         `}
       </style>
