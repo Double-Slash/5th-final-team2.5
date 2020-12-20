@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import './styles/custom.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export { default as Button } from './components/Button';
