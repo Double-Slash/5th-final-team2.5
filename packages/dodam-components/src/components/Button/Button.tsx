@@ -50,7 +50,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
       <style jsx>
         {`
           .btn {
-            border-radius: 0;
+            border-radius: 6px;
+            color: #fff;
+          }
+          .btn-outline-primary {
+            color: #000;
           }
           .btn-md {
             height: 46px;
