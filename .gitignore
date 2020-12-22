@@ -12,5 +12,5 @@ coverage
 dist/
 
 .DS_Store
-# Local Netlify folder
 .netlify
+storybook-static
