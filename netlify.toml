@@ -1,4 +1,2 @@
-# example netlify.toml
 [build]
-  command = "cd packages/dodam && yarn run build && yarn run export"
-  publish = "packages/dodam/out"
+  ignore="git diff --quiet HEAD^ HEAD packages/dodam-server"
