@@ -27,3 +27,6 @@ export type { FileProps } from './components/File';
 
 export { default as Navigation } from './components/Navigation';
 export type { NavigationProps } from './components/Navigation';
+
+export { default as DatePicker } from './components/DatePicker';
+export type { DateProps } from './components/DatePicker';
