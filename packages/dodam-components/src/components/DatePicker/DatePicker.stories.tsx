@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import DatePicker, { DateProps } from './DatePicker';
 
 export default {
-  title: 'DatePciker',
+  title: 'DatePicker',
   component: DatePicker,
 } as Meta;
 

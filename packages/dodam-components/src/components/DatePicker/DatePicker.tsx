@@ -3,7 +3,6 @@ import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 
 export interface DateProps extends ReactDatePickerProps {
   label?: string;
-  type?: string;
   placeholder?: string;
 }
 
