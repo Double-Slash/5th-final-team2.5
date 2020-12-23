@@ -1,4 +1,5 @@
 import '../styles/bootstrap.scss';
+import 'react-datepicker/dist/react-datepicker.css';
 import { Navigation } from '@dodam/components';
 
 const Dodam = ({ Component, pageProps }) => (
