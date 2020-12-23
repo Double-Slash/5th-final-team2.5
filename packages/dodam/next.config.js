@@ -1,8 +1,9 @@
-const withTM = require('next-transpile-modules');
-const withTypescript = require('@zeit/next-typescript');
+const withTM = require('next-transpile-modules')(['@dodam/components'], true);
 
-module.exports = withTypescript(
-  withTM({
-    transpileModules: ['dodam-components'],
-  })
-);
+// const webpack = withTypescript(
+//   withTM({
+//     transpileModules: ['dodam-components'],
+//   })
+// );
+
+module.exports = withTM();
