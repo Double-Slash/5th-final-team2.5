@@ -17,16 +17,3 @@ MultiLine.args = {
   multiline: true,
   placeholder: '동아리 소개 (200자 이상)',
 };
-
-const TemplatDate: Story<InputProps> = (args) => {
-  const [date, setDate] = React.useState(null);
-  const handleChange = (selectedDate) => {
-    setDate(selectedDate);
-  };
-  return <InputBox {...args} onChange={handleChange} selected={date} type="date" />;
-};
-export const DateInput = TemplatDate.bind({});
-DateInput.args = {
-  placeholder: '날짜선택',
-  label: '부터',
-};

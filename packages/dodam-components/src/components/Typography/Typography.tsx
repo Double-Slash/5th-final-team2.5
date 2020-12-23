@@ -3,9 +3,9 @@ import classNames from 'classnames';
 
 type WeightTypes = 'bolder' | 'bold' | 'normal' | 'light' | 'lighter';
 type AlignTypes = 'left' | 'center' | 'right';
-type TypographyRefs = HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement;
 
-export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
+export type TypographyRefs = HTMLParagraphElement & HTMLHeadingElement & HTMLSpanElement;
+export interface TypographyProps extends React.HTMLAttributes<TypographyRefs> {
   variant?: 'p' | 'h6' | 'h5' | 'h4' | 'h3' | 'h2' | 'h1' | 'span';
   align?: AlignTypes;
   noWrap?: boolean;
