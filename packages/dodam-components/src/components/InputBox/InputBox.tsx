@@ -6,7 +6,7 @@ export interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElemen
   selected?: Date;
 }
 
-const InputBox = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, InputBoxProps | any>((props, ref) => {
+const InputBox = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, InputBoxProps>((props, ref) => {
   const { multiline, id, label, type, ...rest } = props;
   const Component = multiline ? 'textarea' : 'input';
   return (
