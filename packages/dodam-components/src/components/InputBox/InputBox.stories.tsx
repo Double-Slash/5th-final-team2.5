@@ -1,7 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import InputBox, { InputBoxProps } from './InputBox';
-import { InputProps } from '../Input/Input';
 
 export default {
   title: 'InputBox',
