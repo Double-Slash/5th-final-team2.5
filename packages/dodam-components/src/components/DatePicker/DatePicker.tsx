@@ -18,7 +18,6 @@ const DatePicker = React.forwardRef<ReactDatePicker, DateProps>((props, ref) => 
         className="form-control"
         popperPlacement="auto"
         placeholderText={placeholder}
-        onChange={(date) => console.log(date)}
       />
 
       {label && <label htmlFor={id}>{label}</label>}
