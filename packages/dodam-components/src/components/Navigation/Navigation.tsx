@@ -24,7 +24,7 @@ const Navigation = React.forwardRef<HTMLHeadElement, NavigationProps>((props, re
             left: auto;
             right: 0;
             width: 100%;
-            z-inder: 1100;
+            z-index: 1100;
             background: #d9d9d9;
             box-sizing: border-box;
             display: flex;
