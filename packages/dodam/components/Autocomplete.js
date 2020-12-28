@@ -22,6 +22,13 @@ function NoSuggestion() {
   return <Typography className="no-suggestion">검색 결과가 없습니다.</Typography>;
 }
 
+/**
+ *
+ * @param {onFocus, onBlur, onChange, placeholder, visibility, data} param0
+ * onFocus = input이 focus되면 실행
+ * onBlur = suggestion이 선택되거나 input의 value가 공백인상태에서 backspace를 누르면 실행
+ * onChange = input에 onChange 이벤트가 실행되면 value, verified를 반환. suggestion에서 선택된 경우 verified = true
+ */
 export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, visibility, data = [] }) {
   const [keyword, setKeyword] = useState('');
   const [chosung, setChosung] = useState([]);
@@ -104,6 +111,10 @@ export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, v
     onBlur();
   };
 
+  const handleBlur = () => {
+    if (!keyword) onBlur();
+  };
+
   const getSuggestList = useMemo(() => {
     if (!keyword) return null;
     if (!suggestList.length) return <NoSuggestion />;
@@ -126,6 +137,7 @@ export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, v
         ref={inputRef}
         value={keyword}
         onChange={handleChange}
+        onBlur={handleBlur}
         onFocus={onFocus}
         placeholder={placeholder}
         className="auto-input"

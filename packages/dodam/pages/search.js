@@ -3,6 +3,12 @@ import { Typography, Button } from '@dodam/components';
 import Autocomplete from '@/components/Autocomplete';
 import CollegeData from '@/utils/colleges';
 
+/**
+ * suggestion이 보여지는 경우: verified가 되지 않는 상태에서 focus되는 경우
+ * suggestion이 숨겨지는 경우: verified가 된 경우. value가 공백인 경우에 onBlur 또는 backspace 누른 경우
+ * 테스트 시작은 keyword가 verified된 경우에 가능
+ */
+
 export default function Search() {
   const textWrapperRef = useRef(null);
   const textRef = useRef(null);
@@ -20,19 +26,23 @@ export default function Search() {
     });
   };
 
-  const handleOnFocus = ({ target: { value } }) => {
-    if (keyword.verified && keyword.value === value) return;
-    showSuggestion();
-  };
-
-  const handleOnBlur = () => {
+  const hideSuggestion = () => {
     [textWrapperRef, textRef, bgRef, btnRef].forEach((ref) => {
       ref.current.classList.remove('focused');
     });
   };
 
+  const handleOnFocus = ({ target: { value } }) => {
+    if (keyword.verified && keyword.value === value) return;
+    showSuggestion();
+  };
+
   // suggestion에서 선택되면 verified = true로 콜백됨.
   const handleChange = (name, verified) => {
+    if (!name) {
+      setKeyword({ value: name, verified: false });
+      return;
+    }
     // verify가 되지 않는 키워드로 변경되면 다시 suggestion을 보여준다.
     if (!verified && !textWrapperRef.current.classList.contains('focused')) {
       setKeyword({
@@ -83,7 +93,7 @@ export default function Search() {
         </Typography>
         <Autocomplete
           onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
+          onBlur={hideSuggestion}
           onChange={handleChange}
           placeholder="학교 이름을 입력하세요."
           visibility={sugVisibility}
