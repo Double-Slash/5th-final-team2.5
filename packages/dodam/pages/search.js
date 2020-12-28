@@ -4,7 +4,7 @@ import Autocomplete from '@/components/Autocomplete';
 import CollegeData from '@/utils/colleges';
 
 /**
- * suggestion이 보여지는 경우: verified가 되지 않는 상태에서 focus되는 경우
+ * suggestion이 보여지는 경우: verified가 되지 않는 상태에서 focus또는 change 되는 경우
  * suggestion이 숨겨지는 경우: verified가 된 경우. value가 공백인 경우에 onBlur 또는 backspace 누른 경우
  * 테스트 시작은 keyword가 verified된 경우에 가능
  */
@@ -121,7 +121,7 @@ export default function Search() {
           .search .text-wrapper {
             transform: translate(0, calc(30vh));
             transition: transform 0.75s ease;
-            padding: 0px 32px;
+            padding: 0px 8px;
           }
           .search .text-wrapper.focused {
             transform: translate(0, -64px);
@@ -155,7 +155,7 @@ export default function Search() {
             position: absolute;
             padding: 8px;
             left: 0;
-            bottom: 16px;
+            bottom: 0;
             display: flex;
             width: 100%;
             transition: opacity 0.5s ease;
