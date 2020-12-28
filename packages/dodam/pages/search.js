@@ -9,16 +9,43 @@ export default function Search() {
   const bgRef = useRef(null);
   const btnRef = useRef(null);
   const [sugVisibility, setSugVisibility] = useState(false);
+  const [keyword, setKeyword] = useState({
+    value: '',
+    verified: false,
+  });
 
-  const handleOnFocus = () => {
+  const showSuggestion = () => {
     [textWrapperRef, textRef, bgRef, btnRef].forEach((ref) => {
       ref.current.classList.add('focused');
     });
   };
 
-  const handleOnBlur = (name) => {
+  const handleOnFocus = ({ target: { value } }) => {
+    if (keyword.verified && keyword.value === value) return;
+    showSuggestion();
+  };
+
+  const handleOnBlur = () => {
     [textWrapperRef, textRef, bgRef, btnRef].forEach((ref) => {
       ref.current.classList.remove('focused');
+    });
+  };
+
+  // suggestion에서 선택되면 verified = true로 콜백됨.
+  const handleChange = (name, verified) => {
+    // verify가 되지 않는 키워드로 변경되면 다시 suggestion을 보여준다.
+    if (!verified && !textWrapperRef.current.classList.contains('focused')) {
+      setKeyword({
+        value: name,
+        verified: false,
+      });
+      showSuggestion();
+      return;
+    }
+
+    setKeyword({
+      value: name,
+      verified: true,
     });
   };
 
@@ -57,6 +84,7 @@ export default function Search() {
         <Autocomplete
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
+          onChange={handleChange}
           placeholder="학교 이름을 입력하세요."
           visibility={sugVisibility}
           data={CollegeData}
@@ -68,7 +96,7 @@ export default function Search() {
         <Button variant="secondary" outline style={{ color: '#000' }}>
           이전으로
         </Button>
-        <Button variant="secondary" disabled>
+        <Button variant="secondary" disabled={!keyword.verified}>
           테스트 시작
         </Button>
       </div>

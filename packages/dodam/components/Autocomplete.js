@@ -22,7 +22,7 @@ function NoSuggestion() {
   return <Typography className="no-suggestion">검색 결과가 없습니다.</Typography>;
 }
 
-export default function Autocomplete({ onFocus, onBlur, placeholder, visibility, data = [] }) {
+export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, visibility, data = [] }) {
   const [keyword, setKeyword] = useState('');
   const [chosung, setChosung] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
@@ -94,11 +94,13 @@ export default function Autocomplete({ onFocus, onBlur, placeholder, visibility,
     setSelectedItem(0);
     setSuggestList(searchRes);
     setKeyword(value);
+    onChange(value, false);
   };
 
   const handleItemSelected = (selected) => {
     setSelectedItem(0);
     setKeyword(selected);
+    onChange(selected, true);
     onBlur();
   };
 
