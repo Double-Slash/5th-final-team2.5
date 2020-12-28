@@ -1,25 +1,50 @@
-import { Input, Typography, Button } from '@dodam/components';
-import { useRef } from 'react';
+import { Typography, Button } from '@dodam/components';
+import { useRef, useEffect, useState } from 'react';
+import Autocomplete from '@/components/Autocomplete';
 
 export default function Search() {
   const textWrapperRef = useRef(null);
   const textRef = useRef(null);
   const bgRef = useRef(null);
   const btnRef = useRef(null);
+  const [sugVisibility, setSugVisibility] = useState(false);
 
   const handleOnFocus = () => {
-    textWrapperRef.current.classList.add('focused');
-    textRef.current.classList.add('focused');
-    bgRef.current.classList.add('focused');
-    btnRef.current.classList.add('focused');
+    [textWrapperRef, textRef, bgRef, btnRef].forEach((ref) => {
+      ref.current.classList.add('focused');
+    });
   };
 
   const handleOnBlur = () => {
-    textWrapperRef.current.classList.remove('focused');
-    textRef.current.classList.remove('focused');
-    bgRef.current.classList.remove('focused');
-    btnRef.current.classList.remove('focused');
+    [textWrapperRef, textRef, bgRef, btnRef].forEach((ref) => {
+      ref.current.classList.remove('focused');
+    });
   };
+
+  useEffect(() => {
+    function onCompleted(evt) {
+      if (evt.propertyName !== 'transform') return;
+
+      if (evt.target.classList.contains('focused')) {
+        setSugVisibility(true);
+      }
+      if (!evt.target.classList.contains('focused')) {
+        setSugVisibility(false);
+      }
+    }
+    function onStart(evt) {
+      if (evt.propertyName !== 'transform') return;
+
+      setSugVisibility(false);
+    }
+
+    textWrapperRef.current.addEventListener('transitionend', onCompleted);
+    textWrapperRef.current.addEventListener('transitionstart', onStart);
+    return () => {
+      textWrapperRef.current.removeEventListener('transitionend', onCompleted);
+      textWrapperRef.current.removeEventListener('transitionstart', onStart);
+    };
+  }, [textWrapperRef]);
 
   return (
     <div className="search">
@@ -28,12 +53,22 @@ export default function Search() {
         <Typography ref={textRef} className="text-school" variant="h2" align="center" weight="bold">
           본인의 학교를 검색하세요
         </Typography>
-        <Input onFocus={handleOnFocus} onBlur={handleOnBlur} placeholder="학교 이름을 입력하세요" />
+        <Autocomplete
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
+          placeholder="학교 이름을 입력하세요."
+          visibility={sugVisibility}
+        />
       </div>
 
       <div className="btn-wrapper" ref={btnRef}>
-        <Button variant="secondary">테스트 시작</Button>
-        <Button variant="secondary">테스트 시작2</Button>
+        {/* TODO: Fix button component in dodam-components */}
+        <Button variant="secondary" outline style={{ color: '#000' }}>
+          이전으로
+        </Button>
+        <Button variant="secondary" disabled>
+          테스트 시작
+        </Button>
       </div>
 
       <style jsx>
@@ -78,8 +113,9 @@ export default function Search() {
 
           .search .btn-wrapper {
             position: absolute;
+            padding: 8px;
             left: 0;
-            bottom: 0;
+            bottom: 16px;
             display: flex;
             width: 100%;
             transition: opacity 0.5s ease;
