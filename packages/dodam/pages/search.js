@@ -1,6 +1,7 @@
 import { Typography, Button } from '@dodam/components';
 import { useRef, useEffect, useState } from 'react';
 import Autocomplete from '@/components/Autocomplete';
+import CollegeData from '@/utils/colleges';
 
 export default function Search() {
   const textWrapperRef = useRef(null);
@@ -58,6 +59,7 @@ export default function Search() {
           onBlur={handleOnBlur}
           placeholder="학교 이름을 입력하세요."
           visibility={sugVisibility}
+          data={CollegeData}
         />
       </div>
 

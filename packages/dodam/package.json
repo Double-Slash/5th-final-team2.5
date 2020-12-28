@@ -12,6 +12,7 @@
     "@dodam/components": "0.1.0",
     "bootstrap": "^5.0.0-beta1",
     "classnames": "^2.2.6",
+    "hangul-js": "^0.2.6",
     "next": "10.0.3",
     "react": "17.0.1",
     "react-datepicker": "^3.3.0",
