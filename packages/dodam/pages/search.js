@@ -1,5 +1,5 @@
-import { Typography, Button } from '@dodam/components';
 import { useRef, useEffect, useState } from 'react';
+import { Typography, Button } from '@dodam/components';
 import Autocomplete from '@/components/Autocomplete';
 import CollegeData from '@/utils/colleges';
 
@@ -16,7 +16,7 @@ export default function Search() {
     });
   };
 
-  const handleOnBlur = () => {
+  const handleOnBlur = (name) => {
     [textWrapperRef, textRef, bgRef, btnRef].forEach((ref) => {
       ref.current.classList.remove('focused');
     });
