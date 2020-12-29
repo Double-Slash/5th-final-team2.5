@@ -31,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <div className="input-root" onFocus={handleFocus} onBlur={handleBlur}>
       {label && (
-        <label ref={labelRef} htmlFor={id} className={classNames('label', Boolean(error) && 'text-danger')}>
+        <label ref={labelRef} htmlFor={id} className={classNames('label text-secondary', Boolean(error) && 'text-danger')}>
           {label}
         </label>
       )}
@@ -45,7 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       />
 
       <div className="message-wrapper">
-        <Typography className={classNames(error ? 'text-danger' : 'message')} align="right">
+        <Typography className={classNames(error ? 'text-danger' : 'message text-primary')} align="right">
           {error || message}
         </Typography>
       </div>
@@ -72,14 +72,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             font-size: 1rem;
           }
           .input-root .field::placeholder {
-            color: #bbbbbb;
+            color: #cdcdcd;
           }
           .input-root .field:focus {
             padding-bottom: 4px;
             border-bottom-width: 2px;
           }
           .input-root .label {
-            color: #bbbbbb;
             font-size: 14px;
             transition: color 0.3s ease;
           }
@@ -102,7 +101,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             margin: 0;
           }
           .input-root .message-wrapper .message {
-            color: #bbbbbb !important;
             font-size: 14px;
             margin: 0;
           }
