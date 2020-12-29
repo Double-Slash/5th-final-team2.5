@@ -102,8 +102,7 @@ export default function Search() {
       </div>
 
       <div className="btn-wrapper" ref={btnRef}>
-        {/* TODO: Fix button component in dodam-components */}
-        <Button variant="secondary" outline style={{ color: '#000' }}>
+        <Button variant="secondary" outline>
           이전으로
         </Button>
         <Button variant="secondary" disabled={!keyword.verified}>

@@ -19,7 +19,7 @@ function SuggestionItem(props) {
 }
 
 function NoSuggestion() {
-  return <Typography className="no-suggestion">검색 결과가 없습니다.</Typography>;
+  return <Typography className="no-suggestion text-secondary">검색 결과가 없습니다.</Typography>;
 }
 
 /**
@@ -147,11 +147,6 @@ export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, v
       <style jsx global>
         {`
           .suggestions .no-suggestion {
-            color: #cdcdcd;
-            font-size: 18px;
-          }
-          .suggestions .no-suggestion {
-            color: #cdcdcd;
             font-size: 18px;
           }
           .suggestions .suggestion-item {
