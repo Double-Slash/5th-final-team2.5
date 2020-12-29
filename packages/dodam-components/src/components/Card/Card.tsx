@@ -1,19 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export interface CardProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CardProps  extends React.HTMLAttributes<HTMLDivElement> {
   imageSrc?:string;
   label?:string;
   description?:string;
-
 }
+function Card({ label, imageSrc,description }: CardProps) {
 
-const Card = React.forwardRef<HTMLInputElement, CardProps>((props, ref) => {
-  const { label, id,imageSrc,description,  ...rest } = props;
-  const classes = classNames("card border-light");
+ 
   return (
-
-    <div className={classes}>
+<div className="col">
+    <div className="card border-light">
         <style jsx>
           {`
          
@@ -42,7 +40,8 @@ const Card = React.forwardRef<HTMLInputElement, CardProps>((props, ref) => {
                     <p className="card-text">{description}</p>
                   </div>
     </div>
+    </div>
   );
-});
+}
 
 export default Card;

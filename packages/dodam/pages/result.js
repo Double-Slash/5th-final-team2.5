@@ -1,4 +1,4 @@
-import { Typography, Button } from '@dodam/components';
+import { Typography, Button, Card } from '@dodam/components';
 
 export default function Result() {
   const mode = 1;
@@ -29,35 +29,11 @@ export default function Result() {
             }
 
             .row {
-              margin: 8px 0;
-            }
-            .result-line {
-              height: 4px;
-              background: #eeeeee 0% 0% no-repeat padding-box;
-              opacity: 1;
-            }
-            .recommendation {
-              padding: 30px 10px;
-            }
-            .card {
-              width: 146px;
-            }
-            .col {
-              padding: 8px;
-            }
-            .card-body {
-              padding: 8px;
-            }
-            .card-text {
-              font-size: 12px;
+              padding: 10px;
             }
 
-            .card-img-top {
-              width: 146px;
-              height: 146px;
-              background-color: #aaa;
-              cursor: pointer;
-              border-radius: 6px;
+            .recommendation {
+              padding: 30px 10px;
             }
           `}
         </style>
@@ -104,38 +80,10 @@ export default function Result() {
             </Typography>
 
             <div className="row">
-              <div className="col">
-                <div className="card border-light">
-                  <img src="..." className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <p className="card-text">수원 연합 창작 동아리 '그 노래' 회원모집</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card border-light">
-                  <img src="..." className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <p className="card-text">수원 연합 창작 동아리 '그 노래' 회원모집</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card border-light">
-                  <img src="..." className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <p className="card-text">수원 연합 창작 동아리 '그 노래' 회원모집</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card border-light">
-                  <img src="..." className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <p className="card-text">수원 연합 창작 동아리 '그 노래' 회원모집</p>
-                  </div>
-                </div>
-              </div>
+              <Card />
+              <Card />
+              <Card />
+              <Card />
             </div>
 
             <Button fullWidth>더보기</Button>

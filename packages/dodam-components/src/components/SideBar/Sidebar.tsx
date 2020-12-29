@@ -37,7 +37,7 @@ height: 66px;
             .sidebar-line{
                 border: 1px solid #CDCDCD;
                 text-align:center;
-                margin:10px;
+                margin:8px;
             }
             .list-group-item{
                border:none;
