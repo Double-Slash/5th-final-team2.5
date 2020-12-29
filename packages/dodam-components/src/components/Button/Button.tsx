@@ -51,10 +51,28 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
         {`
           .btn {
             border-radius: 6px;
+          }
+          .btn-primary {
             color: #fff;
+          }
+          .btn-secondary {
+            color: #fff;
+            background-color: #000;
+          }
+          .btn-secondary:disabled {
+            background-color: #cdcdcd;
           }
           .btn-outline-primary {
             color: #000;
+          }
+          .btn-outline-primary:hover {
+            color: #fff;
+          }
+          .btn-outline-secondary {
+            color: #000;
+          }
+          .btn-outline-secondary:hover {
+            color: #fff;
           }
           .btn-md {
             height: 46px;
