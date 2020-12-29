@@ -42,5 +42,9 @@
     "package:server": "lerna run dev --scope=@dodam/server --stream",
     "dev": "lerna run dev --parallel",
     "test": "lerna run test --parallel"
+  },
+  "dependencies": {
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }

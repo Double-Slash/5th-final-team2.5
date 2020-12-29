@@ -4,6 +4,7 @@ const statusCode = require('../modules/statusCode');
 const User = require('../models/Users');
 const bcrypt = require('bcryptjs');
 const jwt = require('../modules/jwt');
+const passport = require('passport');
 
 function isMobile(phoneNum) {
   let regExp = /(01[016789])([1-9]{1}[0-9]{2,3})([0-9]{4})$/;
@@ -93,6 +94,26 @@ module.exports = {
       return res
         .status(statusCode.INTERNAL_SERVER_ERROR)
         .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SIGN_IN_FAIL));
+    }
+  },
+
+  login_google: async (req, res) => {
+    try {
+      await passport.authenticate('google', { scope: ['profile'] });
+      return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.SIGN_IN_SUCCESS));
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(statusCode.INTERNAL_SERVER_ERROR)
+        .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SIGN_IN_FAIL));
+    }
+  },
+
+  login_google_callback: async (req, res) => {
+    try {
+      await passport.authenticate('google', { failureRedirect: 'user/login', successRedirect: '/' });
+    } catch (err) {
+      return res.send('redirect 실패');
     }
   },
 };

@@ -25,6 +25,14 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+// 세션 세팅
+const configureSession = require('./modules/session');
+configureSession(app);
+
+// passport 세팅
+const configurePassport = require('./modules/passport');
+configurePassport(app);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
