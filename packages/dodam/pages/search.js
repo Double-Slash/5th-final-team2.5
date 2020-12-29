@@ -55,7 +55,7 @@ export default function Search() {
 
     setKeyword({
       value: name,
-      verified: true,
+      verified,
     });
   };
 

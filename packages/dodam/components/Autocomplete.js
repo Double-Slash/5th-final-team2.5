@@ -64,6 +64,9 @@ export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, v
       } else if (keyCode === 8) {
         // backspace
         if (!keyword) onBlur();
+      } else if (keyCode === 27) {
+        // escape
+        onBlur();
       }
     };
 
