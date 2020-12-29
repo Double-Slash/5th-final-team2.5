@@ -9,8 +9,16 @@ const Dodam = ({ Component, pageProps }) => (
       <Component {...pageProps} />
     </div>
 
-    <style jsx>
+    <style jsx global>
       {`
+        * {
+          box-sizing: border-box;
+        }
+
+        html,
+        body {
+          font-family: 'Noto Sans KR', sans-serif;
+        }
         .dodam-root {
           padding: 58px 8px 8px 8px;
           min-height: 100vh;
