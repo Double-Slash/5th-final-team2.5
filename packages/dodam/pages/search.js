@@ -88,7 +88,7 @@ export default function Search() {
     <div className="search">
       <div className="bg" ref={bgRef} />
       <div className="text-wrapper" ref={textWrapperRef}>
-        <Typography ref={textRef} className="text-school" variant="h2" align="center" weight="bold">
+        <Typography ref={textRef} className="text-school" variant="h3" align="center" weight="bold">
           본인의 학교를 검색하세요
         </Typography>
         <Autocomplete

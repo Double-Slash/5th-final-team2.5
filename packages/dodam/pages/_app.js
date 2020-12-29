@@ -22,6 +22,7 @@ const Dodam = ({ Component, pageProps }) => (
         .dodam-root {
           padding: 58px 8px 8px 8px;
           min-height: 100vh;
+          background-color: #00000008;
         }
       `}
     </style>
