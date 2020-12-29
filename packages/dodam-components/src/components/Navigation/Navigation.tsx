@@ -25,7 +25,7 @@ const Navigation = React.forwardRef<HTMLHeadElement, NavigationProps>((props, re
             right: 0;
             width: 100%;
             z-index: 1100;
-            background: #d9d9d9;
+            background: #fff;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -35,14 +35,16 @@ const Navigation = React.forwardRef<HTMLHeadElement, NavigationProps>((props, re
           .dodam-header .header {
             flex: 1;
             margin: 0;
+            font-weight: 700 !important;
+            font-size: 18px;
           }
           .dodam-header .header-img {
             height: 24px;
             width: 24px;
-            background-color: #aaa;
             cursor: pointer;
             position: absolute;
             left: 8px;
+            display: none;
           }
         `}
       </style>
