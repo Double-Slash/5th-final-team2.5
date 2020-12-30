@@ -7,6 +7,8 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+const { pw } = require('./config/mongoAtlaspw.json');
+
 const app = express();
 
 //Database
@@ -15,23 +17,13 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
-const { pw } = require('./config/mongoAtlaspw.json');
 
 mongoose
   .connect(`mongodb+srv://jaemin:${pw}@cluster0.s1i8h.mongodb.net/Final-Project?retryWrites=true&w=majority`)
   .then((db) => {
-    console.log(db); // 선언된 변수가 사용되지 않으면 eslint에 위배..?
     console.log('Mongodb connected');
   })
   .catch((err) => console.log(err));
-
-// 세션 세팅
-const configureSession = require('./modules/session');
-configureSession(app);
-
-// passport 세팅
-const configurePassport = require('./modules/passport');
-configurePassport(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

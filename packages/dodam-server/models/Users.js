@@ -5,6 +5,7 @@ const UserSchema = new Schema({
   id: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -20,7 +21,12 @@ const UserSchema = new Schema({
   },
   phonenumber: {
     type: String,
-    required: true,
+    validate: {
+      validator: function (v) {
+        return /\d{3}\d{4}\d{4}/.test(v);
+      },
+    },
+    required: [true, 'User phone number required'],
   },
 });
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('user', UserSchema);
