@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 
 export interface DateProps extends ReactDatePickerProps {
@@ -7,7 +8,7 @@ export interface DateProps extends ReactDatePickerProps {
 }
 
 const DatePicker = React.forwardRef<ReactDatePicker, DateProps>((props, ref) => {
-  const { selected, placeholder, id, label, ...others } = props;
+  const { selected, placeholder, id, label, className, ...others } = props;
 
   return (
     <div className="input-date-wrapper">
@@ -15,7 +16,7 @@ const DatePicker = React.forwardRef<ReactDatePicker, DateProps>((props, ref) => 
         {...others}
         ref={ref}
         selected={selected}
-        className="form-control"
+        className={classNames('form-control', className)}
         popperPlacement="auto"
         placeholderText={placeholder}
       />

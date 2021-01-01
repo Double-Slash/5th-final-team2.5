@@ -11,4 +11,11 @@ describe('<Badge />', () => {
 
     expect(component.textContent).toBe('Message');
   });
+  it('className을 전달할 수 있다.', () => {
+    const component = mount(<Badge className="test" />)
+      .find('span')
+      .getDOMNode();
+
+    expect(component.classList).toContain('test');
+  });
 });

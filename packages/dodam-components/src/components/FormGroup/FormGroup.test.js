@@ -20,4 +20,12 @@ describe('<FormGroup />', () => {
 
     expect(component.length).toBe(0);
   });
+
+  it('className을 전달할 수 있다.', () => {
+    const component = mount(<FormGroup className="test" />)
+      .find('fieldset')
+      .getDOMNode();
+
+    expect(component.classList).toContain('test');
+  });
 });
