@@ -1,5 +1,5 @@
 {
-  "extends": ["../../.eslintrc.json", "plugin:react/recommended", "airbnb", "prettier"],
+  "extends": ["../../.eslintrc.json", "airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "settings": {
     "react": {
@@ -9,7 +9,7 @@
       "babel-module": {}
     }
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": ["react", "react-hooks"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prefer-stateless-function": "off",
