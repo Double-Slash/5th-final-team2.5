@@ -8,7 +8,8 @@ function SuggestionItem(props) {
   return (
     <div
       className={classNames('suggestion-item', selected && 'selected')}
-      onClick={() => onClick([before, text, after].join(''))}>
+      onClick={() => onClick([before, text, after].join(''))}
+      aria-hidden="true">
       <Typography variant="span">{before}</Typography>
       <Typography variant="span" className="text-primary">
         {text}
@@ -36,6 +37,48 @@ export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, v
   const [selectedItem, setSelectedItem] = useState(0);
   const inputRef = useRef();
 
+  const handleItemSelected = (selected) => {
+    setSelectedItem(0);
+    setKeyword(selected);
+    onChange(selected, true);
+    onBlur();
+  };
+
+  const handleChange = ({ target: { value } }) => {
+    let searchRes;
+    try {
+      if (Hangul.isChoAll(value)) {
+        searchRes = chosung.reduce((acc, cur, idx) => {
+          const rangeSearched = Hangul.rangeSearch(cur, value);
+
+          if (rangeSearched.length) {
+            return acc.concat({ range: rangeSearched[0], name: data[idx] });
+          }
+          return acc;
+        }, []);
+      } else {
+        searchRes = data.reduce((acc, cur) => {
+          const rangeSearched = Hangul.rangeSearch(cur, value);
+
+          if (rangeSearched.length) {
+            return acc.concat({ range: rangeSearched[0], name: cur });
+          }
+          return acc;
+        }, []);
+      }
+    } catch (err) {
+      searchRes = [];
+    }
+
+    setSelectedItem(0);
+    setSuggestList(searchRes);
+    setKeyword(value);
+    onChange(value, false);
+  };
+
+  const handleBlur = () => {
+    if (!keyword) onBlur();
+  };
   useEffect(() => {
     const disassembled = data.reduce((acc, cur) => {
       const joinedChosung = Hangul.disassemble(cur, true)
@@ -73,50 +116,6 @@ export default function Autocomplete({ onFocus, onBlur, onChange, placeholder, v
     inputRef.current.addEventListener('keydown', onKeyInput);
     return () => inputRef.current.removeEventListener('keydown', onKeyInput);
   }, [suggestList, selectedItem]);
-
-  const handleChange = ({ target: { value } }) => {
-    let searchRes;
-    try {
-      if (Hangul.isChoAll(value)) {
-        searchRes = chosung.reduce((acc, cur, idx) => {
-          const rangeSearched = Hangul.rangeSearch(cur, value);
-
-          if (rangeSearched.length) {
-            return acc.concat({ range: rangeSearched[0], name: data[idx] });
-          }
-          return acc;
-        }, []);
-      } else {
-        searchRes = data.reduce((acc, cur) => {
-          const rangeSearched = Hangul.rangeSearch(cur, value);
-
-          if (rangeSearched.length) {
-            return acc.concat({ range: rangeSearched[0], name: cur });
-          }
-          return acc;
-        }, []);
-      }
-    } catch (err) {
-      console.error(err);
-      searchRes = [];
-    }
-
-    setSelectedItem(0);
-    setSuggestList(searchRes);
-    setKeyword(value);
-    onChange(value, false);
-  };
-
-  const handleItemSelected = (selected) => {
-    setSelectedItem(0);
-    setKeyword(selected);
-    onChange(selected, true);
-    onBlur();
-  };
-
-  const handleBlur = () => {
-    if (!keyword) onBlur();
-  };
 
   const getSuggestList = useMemo(() => {
     if (!keyword) return null;
