@@ -23,4 +23,12 @@ describe('<InputBox />', () => {
 
     expect(wrapper.find('textarea').length).toBe(1);
   });
+
+  it('className을 input에 전달할 수 있다.', () => {
+    const component = mount(<InputBox className="test" />)
+      .find('input')
+      .getDOMNode();
+
+    expect(component.classList).toContain('test');
+  });
 });

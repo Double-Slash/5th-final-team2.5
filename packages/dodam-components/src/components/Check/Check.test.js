@@ -14,4 +14,11 @@ describe('<Check />', () => {
 
     expect(component.length).toBe(0);
   });
+
+  it('className을 전달할 수 있다.', () => {
+    const component = shallow(<Check className="test" />).find('input');
+
+    console.log(component.debug());
+    expect(component.hasClass('test')).toBeTruthy();
+  });
 });

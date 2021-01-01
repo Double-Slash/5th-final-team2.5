@@ -30,4 +30,13 @@ describe('<ProgressBar />', () => {
 
     expect(component.getAttribute('style')).toContain('width: 50%;');
   });
+
+  it('className을 전달할 수 있다.', () => {
+    const component = mount(<ProgressBar className="test" />)
+      .find('.progress')
+      .first()
+      .getDOMNode();
+
+    expect(component.classList).toContain('test');
+  });
 });

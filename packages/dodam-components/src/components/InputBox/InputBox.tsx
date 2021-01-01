@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElement & HTMLTextAreaElement> {
   multiline?: boolean;
@@ -7,7 +8,7 @@ export interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 const InputBox = React.forwardRef<HTMLInputElement & HTMLTextAreaElement, InputBoxProps>((props, ref) => {
-  const { multiline, id, label, type, ...rest } = props;
+  const { multiline, id, label, className, type, ...rest } = props;
   const Component = multiline ? 'textarea' : 'input';
   return (
     <>
@@ -16,7 +17,7 @@ const InputBox = React.forwardRef<HTMLInputElement & HTMLTextAreaElement, InputB
           {label}
         </label>
       )}
-      <Component type={type} id={id} className="form-control" ref={ref} {...rest} />
+      <Component type={type} id={id} className={classNames('form-control', className)} ref={ref} {...rest} />
 
       <style jsx>
         {`

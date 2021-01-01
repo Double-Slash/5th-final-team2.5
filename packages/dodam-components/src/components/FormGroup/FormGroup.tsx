@@ -7,11 +7,11 @@ export interface FormGroupProps extends React.HTMLAttributes<HTMLFieldSetElement
 }
 
 const FormGroup = React.forwardRef<HTMLFieldSetElement, FormGroupProps>((props, ref) => {
-  const { required = false, name, children, ...rest } = props;
+  const { required = false, name, children, className, ...rest } = props;
   const classes = classNames('form-legend', required && 'form-required');
 
   return (
-    <fieldset className="form-group" {...rest} ref={ref}>
+    <fieldset className={classNames('form-group', className)} {...rest} ref={ref}>
       {name && <legend className={classes}>{name}</legend>}
       {children}
 

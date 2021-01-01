@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Typography from '../Typography';
 
 export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,7 +15,7 @@ const getPercentage = (value, min, max) => {
 };
 
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) => {
-  const { height = 5, value = 0, min = 0, max = 100, style, ...rest } = props;
+  const { height = 5, value = 0, min = 0, max = 100, style, className, ...rest } = props;
 
   const percent = getPercentage(value, min, max);
   return (
@@ -27,7 +28,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>((props, r
         <Typography variant="span">{max}</Typography>
       </div>
 
-      <div className="progress" style={{ height }} {...rest}>
+      <div className={classNames('progress', className)} style={{ height }} {...rest}>
         <div
           ref={ref}
           className="progress-bar"

@@ -2,7 +2,8 @@
   "extends": [
     "../../.eslintrc.json",
     "airbnb",
-    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/react",
     "plugin:react-hooks/recommended",
     "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",

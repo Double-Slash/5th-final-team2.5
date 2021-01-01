@@ -13,7 +13,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { label, placeholder, id, name, error, message, icon, ...rest } = props;
+  const { label, placeholder, id, name, error, message, icon, className, ...rest } = props;
   const labelRef = useRef(null);
   const inputRef = useRef(null);
   const combinedRef = useCombinedRef(ref, inputRef);
@@ -29,9 +29,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   };
 
   return (
-    <div className="input-root" onFocus={handleFocus} onBlur={handleBlur}>
+    <div className={classNames('input-root', className)} onFocus={handleFocus} onBlur={handleBlur}>
       {label && (
-        <label ref={labelRef} htmlFor={id} className={classNames('label text-secondary', Boolean(error) && 'text-danger')}>
+        <label
+          ref={labelRef}
+          htmlFor={id}
+          className={classNames('label text-secondary', Boolean(error) && 'text-danger')}>
           {label}
         </label>
       )}

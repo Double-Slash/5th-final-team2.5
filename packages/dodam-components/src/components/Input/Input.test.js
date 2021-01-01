@@ -27,4 +27,13 @@ describe('<Input />', () => {
 
     expect(component.length).toBe(1);
   });
+
+  it('className을 root에 전달할 수 있다.', () => {
+    const component = mount(<Input className="test" />)
+      .find('.input-root')
+      .first()
+      .getDOMNode();
+
+    expect(component.classList).toContain('test');
+  });
 });
