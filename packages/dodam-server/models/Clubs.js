@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+require('mongoose-type-url');
 
 const CommentaireSchema = new Schema({
   Commentaire: [
