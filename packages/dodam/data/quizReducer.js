@@ -5,6 +5,7 @@ import {
   SHOW_RESULTS,
   NEXT_QUESTION,
   PREV_QUESTION,
+  SUBMIT_ANSWER,
 } from './actionTypes';
 
 function quizReducer(state, action) {
@@ -32,12 +33,20 @@ function quizReducer(state, action) {
     case NEXT_QUESTION:
       return {
         ...state,
-        currentQuestion: action.currentQuestion + 1,
+        currentQuestion:
+          state.currentQuestion + 1 < state.questions.length ? state.currentQuestion + 1 : state.currentQuestion,
       };
     case PREV_QUESTION:
       return {
         ...state,
-        currentQuestion: action.currentQuestion - 1 >= 0 ? action.currentQuestion - 1 : 0,
+        currentQuestion: state.currentQuestion - 1 >= 0 ? state.currentQuestion - 1 : 0,
+        currentAnswer: action.currentAnswer,
+      };
+    case SUBMIT_ANSWER:
+      return {
+        ...state,
+        answers: [...state.answers, action.answer],
+        currentAnswer: '',
       };
     default:
       return state;

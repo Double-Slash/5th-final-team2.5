@@ -3,23 +3,17 @@ import { Badge } from '@dodam/components';
 const Tags = () => {
   return (
     <div className="tags">
-      <div className="tag-item">
-        <Badge>봉사</Badge>
-      </div>
-      <div className="tag-item">
-        <Badge>서울</Badge>
-      </div>
-      <div className="tag-item">
-        <Badge>10~30명</Badge>
-      </div>
-      <style jsx global>{`
+      <Badge className="tag-item">봉사</Badge>
+      <Badge className="tag-item">서울</Badge>
+      <Badge className="tag-item">10~30명</Badge>
+      <style jsx>{`
         .tags {
           display: flex;
-          margin-top: 22px;
-          margin-bottom: 25px;
+          margin-top: 24px;
+          margin-bottom: 24px;
         }
-        .tag-item {
-          margin-right: 6px;
+        :global(.tag-item) {
+          margin-right: 8px;
         }
       `}</style>
     </div>

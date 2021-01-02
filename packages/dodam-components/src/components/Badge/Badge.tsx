@@ -10,8 +10,8 @@ export interface BadgeProps extends Omit<TypographyProps, 'variant' | 'align'> {
 
 const Badge = React.forwardRef<HTMLParagraphElement & HTMLHeadingElement & HTMLSpanElement, BadgeProps>(
   (props, ref) => {
-    const { size, rounded = true, color = 'primary', ...rest } = props;
-    const classes = classNames('badge', rounded && 'rounded-pill', `bg-${color}`, size && `badge-${size}`);
+    const { className, size, rounded = true, color = 'primary', ...rest } = props;
+    const classes = classNames(className, 'badge', rounded && 'rounded-pill', `bg-${color}`, size && `badge-${size}`);
 
     return (
       <>

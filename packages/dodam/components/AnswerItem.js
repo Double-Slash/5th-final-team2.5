@@ -1,34 +1,31 @@
 import { SET_CURRENT_ANSWER } from '../data/actionTypes';
 import { Button } from '@dodam/components';
+import classNames from 'classnames';
 
 const AnswerItem = (props) => {
-  let classes = ['answer'];
+  const { dispatch, answer, selected } = props;
+  const classes = classNames('answer', selected && 'bg-primary');
+
   const handleClick = (e) => {
-    props.dispatch({
+    dispatch({
       type: SET_CURRENT_ANSWER,
       currentAnswer: e.target.value,
     });
   };
 
-  if (props.selected) {
-    classes.push('selected');
-  }
   return (
     <div className="buttons">
-      <Button outline="true" className={classes.join(' ')} value={props.answer} onClick={handleClick}>
-        {props.answer}
+      <Button outline={true} className={classes} value={answer} onClick={handleClick}>
+        {answer}
       </Button>
-      <style jsx global>{`
+      <style jsx>{`
         .buttons {
           display: flex;
           justify-content: center;
         }
-        .answer {
-          margin-bottom: 15px;
+        .buttons :global(.answer) {
+          margin-bottom: 16px;
           width: 240px;
-        }
-        .answer.selected {
-          background-color: #ebba00;
         }
       `}</style>
     </div>
