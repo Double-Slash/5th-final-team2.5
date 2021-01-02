@@ -57,6 +57,10 @@ const ClubSchema = new Schema({
   register_date: {
     type: Date,
     default: Date.now(),
+  },
+  url: {
+    representative_image: {type: mongoose.SchemaTypes.Url},
+    logo_image: {type: mongoose.SchemaTypes.Url}, 
   }
 });
 module.exports = mongoose.model('club', UserSchema);
