@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CommentaireSchema = new Schema({
-  commentaire: [
+  Commentaire: [
     {
       type: String,
     }
@@ -10,57 +10,57 @@ const CommentaireSchema = new Schema({
 })
 
 const ClubSchema = new Schema({
-  writer: {
+  Writer: {
     type: String,
     required: true,
     unique: true,
   },
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  school: {
+  Name: {
     type: String,
     required: true,
   },
-  field: {
+  School: {
     type: String,
     required: true,
   },
-  area: {
+  Field: {
     type: String,
     required: true,
   },
-  size: {
+  Area: {
+    type: String,
+    required: true,
+  },
+  Size: {
     type: Number,
     required: true,
   },
-  recruit_start_date: {
+  RecruitStartDate: {
+    type: Date,
+  },
+  RecruitEndDate: {
+    type: Date,
+  },
+  RepresentContent: {
     type: String,
   },
-  recruit_end_date: {
+  IntroduceContent: {
     type: String,
   },
-  represent_content: {
-    type: String,
-  },
-  introduce_content: {
-    type: String,
-  },
-  comment: [
+  Comments: [
     CommentaireSchema
   ],
-  likes: {
+  Likes: {
     type: Number,
+    default: 0,
   },
-  register_date: {
+  RegisterDate: {
     type: Date,
     default: Date.now(),
   },
-  url: {
-    representative_image: {type: mongoose.SchemaTypes.Url},
-    logo_image: {type: mongoose.SchemaTypes.Url}, 
+  Url: {
+    RepresentativeImage: {type: mongoose.SchemaTypes.Url},
+    LogoImage: {type: mongoose.SchemaTypes.Url}, 
   }
 });
-module.exports = mongoose.model('club', UserSchema);
+module.exports = mongoose.model('club', ClubSchema);
