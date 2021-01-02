@@ -2,24 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  id: {
+  Email: {
     type: String,
     required: true,
     unique: true,
   },
-  password: {
+  Password: {
     type: String,
     required: true,
   },
-  name: {
+  Name: {
     type: String,
     required: true,
   },
-  birth: {
+  Birth: {
     type: String,
     required: true,
   },
-  phonenumber: {
+  PhoneNumber: {
     type: String,
     validate: {
       validator: function (v) {
@@ -28,7 +28,7 @@ const UserSchema = new Schema({
     },
     required: [true, 'User phone number required'],
   },
-  likes_of_club: {
+  LikesOfClub: {
     type: Schema.Types.ObjectId,
     ref: 'club',
   }
