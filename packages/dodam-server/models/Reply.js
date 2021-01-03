@@ -6,7 +6,7 @@ const validateEmail = function(email) {
     return re.test(email)
 };
 
-const UserSchema = new Schema({
+const ReplySchema = new Schema({
   email: {
     type: String,
     trim: true,
@@ -16,30 +16,28 @@ const UserSchema = new Schema({
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
     unique: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
   },
-  birth: {
-    type: String,
-    required: true,
-  },
-  phoneNumber: {
-    type: String,
-    validate: {
-      validator: function (v) {
-        return /\d{3}\d{4}\d{4}/.test(v);
-      },
-    },
-    required: [true, 'User phone number required'],
-  },
-  likesOfClub: {
+  clubId: {
     type: Schema.Types.ObjectId,
     ref: 'club',
+    required: true,
+  },
+  commentId: {
+    type: Schema.Types.ObjectId,
+    ref: 'comment',
+    required: true,
+  },
+  reply: {
+    type: String, 
+    required: true,
+  },
+  replyTime: {
+    type: Date,
+    default: Date.now,
   }
 });
-module.exports = mongoose.model('user', UserSchema);
+
+module.exports = mongoose.model('reply', ReplySchema);
