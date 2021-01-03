@@ -1,66 +1,53 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const mongoose = require('mongoose');
-require('mongoose-type-url');
-
-const CommentaireSchema = new Schema({
-  Commentaire: [
-    {
-      type: String,
-    }
-  ]
-})
 
 const ClubSchema = new Schema({
-  Writer: {
+  writer: {
     type: String,
     required: true,
     unique: true,
   },
-  Name: {
+  name: {
     type: String,
     required: true,
   },
-  School: {
+  school: {
     type: String,
     required: true,
   },
-  Field: {
+  field: {
     type: String,
     required: true,
   },
-  Area: {
+  area: {
     type: String,
     required: true,
   },
-  Size: {
+  size: {
     type: Number,
     required: true,
   },
-  RecruitStartDate: {
+  recruitStartDate: {
     type: Date,
   },
-  RecruitEndDate: {
+  recruitEndDate: {
     type: Date,
   },
-  RepresentContent: {
+  representContent: {
     type: String,
   },
-  IntroduceContent: {
+  introduceContent: {
     type: String,
   },
-  Comments: [
-    CommentaireSchema
-  ],
-  Likes: {
+  likes: {
     type: Number,
     default: 0,
   },
-  RegisterDate: {
+  registerDate: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
-  Url: {
+  url: {
     RepresentativeImage: {type: mongoose.SchemaTypes.Url},
     LogoImage: {type: mongoose.SchemaTypes.Url}, 
   }
