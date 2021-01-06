@@ -8,8 +8,8 @@ const jwt = require('../modules/jwt');
 // 회원가입
 const signup = async (req, res) => {
   try {
-    const { email, password, name, birth, phonenumber } = req.body;
-    if (!email || !password || !name || !birth || !phonenumber) {
+    const { email, password, name, birth, phoneNumber } = req.body;
+    if (!email || !password || !name || !birth || !phoneNumber) {
       return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
     }
 
@@ -20,10 +20,11 @@ const signup = async (req, res) => {
       password: hashedpw,
       name,
       birth,
-      phonenumber: phonenumber,
+      phoneNumber
     });
     return res.status(statusCode.CREATED).send(util.success(statusCode.CREATED, responseMessage.SIGN_UP_SUCCESS, user));
   } catch (err) {
+    console.log(err);
     return res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SIGN_UP_FAIL));
@@ -46,9 +47,9 @@ const login = async (req, res) => {
       return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_USER));
     }
     const checkPw = await bcrypt.compare(password, checkEmail.password);
-    if (checkPw) {
+    if (!checkPw) {
       console.log('비밀번호 불일치');
-      return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.OK, responseMessage.MISS_MATCH_PW));
+      return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.MISS_MATCH_PW));
     }
 
     const { _id, name, birth, phonenumber } = checkEmail; // 로그인하려는 사용자의 정보 중 일부만 추출
