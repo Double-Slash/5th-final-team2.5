@@ -5,9 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
-const { pw } = require('./config/mongoAtlaspw.json');
+const { id,pw } = require('./config/mongoAtlaspw.json');
 
 const app = express();
 
@@ -19,7 +18,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 mongoose
-  .connect(`mongodb+srv://jaemin:${pw}@cluster0.s1i8h.mongodb.net/Final-Project?retryWrites=true&w=majority`)
+  .connect(`mongodb+srv://${id}:${pw}@cluster0.s1i8h.mongodb.net/Final-Project?retryWrites=true&w=majority`)
   .then((db) => {
     console.log('Mongodb connected');
   })
@@ -36,7 +35,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

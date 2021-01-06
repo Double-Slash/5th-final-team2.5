@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const ClubSchema = new Schema({
   writer: {
-    type: String,
-    required: true,
-    unique: true,
+    type: Schema.Types.ObjectId,
+    ref:'user'
   },
   name: {
     type: String,
@@ -47,9 +46,12 @@ const ClubSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  url: {
-    RepresentativeImage: {type: mongoose.SchemaTypes.Url},
-    LogoImage: {type: mongoose.SchemaTypes.Url}, 
+  representativeImage: {
+    type: String,
+  },
+  logoImage:{
+    type: String,
   }
+  
 });
 module.exports = mongoose.model('club', ClubSchema);
