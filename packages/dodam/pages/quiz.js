@@ -1,10 +1,6 @@
-import { useReducer } from 'react';
+import { useState } from 'react';
 import { ProgressBar } from '@dodam/components';
-import QuizContext from '../context/QuizContext';
-import quizReducer from '../data/quizReducer';
 import QuizItem from '@/components/QuizItem';
-import { Button } from '@dodam/components';
-import * as ActionTypes from '../data/actionTypes';
 
 const questions = [
   {
@@ -34,103 +30,67 @@ const questions = [
 ];
 const answerOptions = [
   {
-    answerOption: '예',
+    answerOption: 'O',
   },
   {
-    answerOption: '아니오',
+    answerOption: 'X',
   },
 ];
-
-const initialState = {
-  questions,
-  answerOptions,
-  currentQuestion: 0,
-  currentAnswer: '',
-  answers: [],
-  showResults: false,
-};
-
 const quiz = () => {
-  const [state, dispatch] = useReducer(quizReducer, initialState);
-  const { currentQuestion, currentAnswer, answers, showResults } = state;
+  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState([]);
   const question = questions[currentQuestion];
   const answer = { questionId: question.id, answerSelected: currentAnswer };
 
-  const prevButton = () => {
-    dispatch({ type: ActionTypes.PREV_QUESTION });
+  const onSubmit = () => {
+    if (confirm('제출하시겠습니까?')) {
+      setAnswers([...answers, answer]);
+      console.log(answers);
+    }
   };
 
-  const nextButton = () => {
+  const onPrev = () => {
+    setCurrentQuestion(currentQuestion - 1 >= 0 ? currentQuestion - 1 : 0);
+  };
+
+  const onNext = () => {
     if (!currentAnswer) {
       alert('답안을 선택해주세요');
       return;
     }
-    dispatch({ type: ActionTypes.SUBMIT_ANSWER, answer });
-    dispatch({ type: ActionTypes.NEXT_QUESTION });
-  };
-
-  const finishButton = () => {
-    if (confirm('제출하시겠습니까?')) {
-      dispatch({ type: ActionTypes.SET_ANSWERS, answer });
-      dispatch({ type: ActionTypes.SHOW_RESULTS, showResults: true });
-    } else {
-      return;
+    setCurrentQuestion(currentQuestion + 1 < questions.length ? currentQuestion + 1 : currentQuestion);
+    setAnswers([...answers, answer]);
+    setCurrentAnswer('');
+    if (currentQuestion + 1 === questions.length) {
+      onSubmit();
     }
   };
 
-  const renderNextButton = () => {
-    if (currentQuestion + 1 < questions.length) {
-      return (
-        <Button className="next-button" outline={true} onClick={nextButton}>
-          다음으로
-        </Button>
-      );
-    }
-    return (
-      <Button className="next-button" outline={true} onClick={finishButton}>
-        완료
-      </Button>
-    );
+  const onSelected = (e) => {
+    setCurrentAnswer(e.target.value);
   };
-
-  //콘솔창에 선택한 답안들 출력
-  if (showResults) {
-    console.log('선택한 답안: ', answers);
-  }
 
   return (
     <div className="main-container">
-      <QuizContext.Provider value={{ state, dispatch }}>
-        <ProgressBar value={currentQuestion + 1} max={questions.length} />
-        <QuizItem />
-        <div className="buttons">
-          <Button className="prev-button" outline={true} onClick={prevButton}>
-            이전으로
-          </Button>
-          {renderNextButton()}
-        </div>
-      </QuizContext.Provider>
-      <style jsx>{`
-        .main-container {
-          margin: 24px 24px 0px;
-        }
-        .buttons {
-          display: flex;
-          flex-direction: row;
-          margin-top: 96px;
-        }
-        :global(.prev-button) {
-          flex: 1;
-          margin-left: 8px;
-        }
-        :global(.next-button) {
-          flex: 1;
-          margin-left: 8px;
-          margin-right: 8px;
-        }
-      `}</style>
+      <ProgressBar value={currentQuestion + 1} max={questions.length} />
+      <QuizItem
+        questions={questions}
+        currentQuestion={currentQuestion}
+        currentAnswer={currentAnswer}
+        answerOptions={answerOptions}
+        onSelected={onSelected}
+        onNext={onNext}
+        onPrev={onPrev}
+      />
+      <style jsx>
+        {`
+          .main-container {
+            margin: 24px 24px 0px;
+          }
+        `}
+      </style>
     </div>
   );
 };
-
 export default quiz;
