@@ -2,6 +2,7 @@ const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
 const Club = require('../models/Clubs');
+const User = require('../models/Users');
 const fs = require('fs');
 
 // 동아리 등록
@@ -12,33 +13,17 @@ const createClub = async (req, res) => {
             recruitStartDate, recruitEndDate,
             representContent, introduceContent,
         } = req.body;
-        if (!name || !school || !field || !area || !size || !recruitStartDate || !recruitEndDate || !representContent || !introduceContent) {
-            return res.status(statusCode.BAD_REQUEST).send(
-                util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE
-                )
-            );
-        }
-        let representativeImage = "";
-        let logoImage = "";
-        if (req.files ? req.files['representativeImage'] : false) {
-            representativeImage = req.files['representativeImage'][0].path;
-        }
-        if (req.files ? req.files['logoImage'] : false) {
-            logoImage = req.files['logoImage'][0].path;
-        }
+        let representativeImage = await getFilePath(req,'representativeImage');
+        let logoImage = await getFilePath(req,'logoImage');   
         const userId = req.decoded.id;
-        const newClub = await Club.create(
-            {
-                name, field, school, area, size, recruitEndDate, recruitStartDate,
-                representContent, introduceContent,
-                representativeImage, logoImage,
-                writer: userId
-            }
-        );
+        const clubValues = {name, field, school, area, size, recruitEndDate, recruitStartDate,
+            representContent, introduceContent,
+            representativeImage, logoImage,
+            writer: userId};
+        const newClub = await Club.create(clubValues);
         return res.status(statusCode.OK).send(
             util.success(statusCode.OK, {
                 newClub
-
             })
         );
     } catch (err) {
@@ -56,44 +41,29 @@ const updateClub = async (req, res) => {
             recruitStartDate, recruitEndDate,
             representContent, introduceContent,
         } = req.body;
-        if (!name || !school || !field || !area || !size || !recruitStartDate || !recruitEndDate || !representContent || !introduceContent) {
-            return res.status(statusCode.BAD_REQUEST).send(
-                util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE
-                )
-            );
-        }
         const clubToEdit = await Club.findOne({_id:clubId});
         fs.unlinkSync(`./${clubToEdit.representativeImage}`);
         fs.unlinkSync(`./${clubToEdit.logoImage}`);
         
-
-        let representativeImage = "";
-        let logoImage = "";
-        if (req.files ? req.files['representativeImage'] : false) {
-            representativeImage = req.files['representativeImage'][0].path;
-        }
-        if (req.files ? req.files['logoImage'] : false) {
-            logoImage = req.files['logoImage'][0].path;
-        }
+        let representativeImage = await getFilePath(req,'representativeImage');
+        let logoImage = await getFilePath(req,'logoImage');
+        
         const userId = req.decoded.id;
-        const updateClub = await Club.update(
+        const updateValues = { name, field, school, area, size, recruitEndDate, recruitStartDate,
+            representContent, introduceContent,
+            representativeImage, logoImage,
+            writer: userId };
+        const updateClub = await Club.updateOne(
             {
                 _id: clubId
             },
             {
-                $set:{
-                    name, field, school, area, size, recruitEndDate, recruitStartDate,
-                    representContent, introduceContent,
-                    representativeImage, logoImage,
-                    writer: userId
-                } 
+                $set: updateValues
             }
-        
         );
         return res.status(statusCode.OK).send(
             util.success(statusCode.OK, {
                 updateClub
-
             })
         );
     } catch (err) {
@@ -104,8 +74,68 @@ const updateClub = async (req, res) => {
     }
 };
 
+const likeClub = async (req,res) => {
+    try{
+        const {clubId} = req.body;
+        const userId = req.decoded.id;
+        let userLikeData = await User.findOne({_id:userId},'likesOfClub');
+        const clubLikeData = await Club.findOne({_id:clubId},'likes');
+        const like = clubLikeData.likes;
+        if(!userLikeData.likesOfClub.includes(clubId)){
+            userLikeData.likesOfClub.push(clubId);
+            await Club.updateOne(
+                {
+                    _id:clubId
+                },
+                {
+                    $set:{likes:like+1}
+                }
+            )
+            userLikeData.save();
+            return res.status(statusCode.OK).send(
+                util.success(statusCode.OK, {
+                    increaseLike : '동아리 스크랩 추가'
+                })
+            );
+        }else{
+            userLikeData.likesOfClub.pull(clubId);
+            await Club.updateOne(
+                {
+                    _id:clubId
+                },
+                {
+                    $set:{likes:like-1}
+                }
+            )
+            userLikeData.save();
+            return res.status(statusCode.OK).send(
+                util.success(statusCode.OK, {
+                    decreaseLike : '동아리 스크랩 제거'
+                })
+            );
+        }
+        
+
+    }catch(err){
+        console.log(err);
+        return res
+            .status(statusCode.INTERNAL_SERVER_ERROR)
+            .send(util.fail(statusCode.INTERNAL_SERVER_ERROR))
+    }
+}
+
+
+const getFilePath = async (req,file) => {
+    if(req.files[file]){
+        return req.files[file][0].path;
+    }else{
+        return undefined;
+    }
+}
+
 module.exports = {
     createClub,
-    updateClub
+    updateClub,
+    likeClub
 
 };
