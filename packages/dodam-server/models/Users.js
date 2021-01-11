@@ -37,9 +37,9 @@ const UserSchema = new Schema({
     },
     required: [true, 'User phone number required'],
   },
-  likesOfClub: {
+  likesOfClub: [{
     type: Schema.Types.ObjectId,
     ref: 'club',
-  }
+  }]
 });
 module.exports = mongoose.model('user', UserSchema);

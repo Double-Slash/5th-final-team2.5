@@ -13,7 +13,7 @@ const createComment = async (req, res) => {
             return res.status(statusCode.BAD_REQUEST).send(
                 util.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE
                 )
-              );
+            );
         }
         const userId = req.decoded.id;
 
@@ -25,10 +25,9 @@ const createComment = async (req, res) => {
 
         return res.status(statusCode.OK).send(
             util.success(statusCode.OK, {
-             newComment
-              
+            newComment
             })
-          );
+        );
     } catch (err) {
         console.log(err);
         return res
@@ -44,7 +43,7 @@ const createReply = async (req, res) => {
             return res.status(statusCode.BAD_REQUEST).send(
                 util.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE
                 )
-              );
+            );
         }
         const userId = req.decoded.id;
 
@@ -57,10 +56,9 @@ const createReply = async (req, res) => {
 
         return res.status(statusCode.OK).send(
             util.success(statusCode.OK, {
-             newReply
-              
+            newReply
             })
-          );
+        );
     } catch (err) {
         console.log(err);
         return res
