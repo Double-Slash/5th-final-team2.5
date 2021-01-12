@@ -50,5 +50,6 @@ module.exports = {
 
   /* 서버에러 */
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
-  EMPTY_TOKEN: '토큰 없음'
+  EMPTY_TOKEN: '토큰 없음',
+  EXPIRED_TOKEN: '만료된 토큰'
 };
