@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const validateEmail = function(email) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(email)
+const validateEmail = function (email) {
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email);
 };
 
 const UserSchema = new Schema({
@@ -37,9 +37,11 @@ const UserSchema = new Schema({
     },
     required: [true, 'User phone number required'],
   },
-  likesOfClub: [{
-    type: Schema.Types.ObjectId,
-    ref: 'club',
-  }]
+  likesOfClub: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'club',
+    },
+  ],
 });
 module.exports = mongoose.model('user', UserSchema);
