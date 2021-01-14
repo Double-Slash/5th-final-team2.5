@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ClubSchema = new Schema({
   writer: {
     type: Schema.Types.ObjectId,
-    ref:'user'
+    ref: 'user',
   },
   name: {
     type: String,
@@ -49,9 +49,8 @@ const ClubSchema = new Schema({
   representativeImage: {
     type: String,
   },
-  logoImage:{
+  logoImage: {
     type: String,
-  }
-  
+  },
 });
 module.exports = mongoose.model('club', ClubSchema);

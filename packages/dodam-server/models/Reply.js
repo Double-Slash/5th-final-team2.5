@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ReplySchema = new Schema({
   writer: {
     type: Schema.Types.ObjectId,
-    ref:'user'
+    ref: 'user',
   },
   clubId: {
     type: Schema.Types.ObjectId,
@@ -17,13 +17,13 @@ const ReplySchema = new Schema({
     required: true,
   },
   reply: {
-    type: String, 
+    type: String,
     required: true,
   },
   replyTime: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 module.exports = mongoose.model('reply', ReplySchema);

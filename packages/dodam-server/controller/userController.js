@@ -20,7 +20,7 @@ const signup = async (req, res) => {
       password: hashedpw,
       name,
       birth,
-      phoneNumber
+      phoneNumber,
     });
     return res.status(statusCode.CREATED).send(util.success(statusCode.CREATED, responseMessage.SIGN_UP_SUCCESS, user));
   } catch (err) {
