@@ -32,5 +32,7 @@ router.put('/updateClub', twoFieldUpload, clubController.updateClub);
 
 router.get('/rankingThisWeek', clubController.ranking);
 router.get('/recruitNow', clubController.recruitNow);
+router.get('/myRegisterClub', clubController.myRegisterClub);
+router.get('/myLikeClub', clubController.myLikeClub);
 
 module.exports = router;
