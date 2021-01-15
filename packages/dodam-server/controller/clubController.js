@@ -5,6 +5,7 @@ const Club = require('../models/Clubs');
 const User = require('../models/Users');
 const fs = require('fs');
 const moment = require('moment');
+const { userInfo } = require('os');
 const today = moment().startOf('day');
 
 // 동아리 등록
@@ -49,6 +50,8 @@ const createClub = async (req, res) => {
     return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR));
   }
 };
+
+// 동아리 수정
 const updateClub = async (req, res) => {
   try {
     const {
@@ -104,6 +107,7 @@ const updateClub = async (req, res) => {
   }
 };
 
+// 동아리 좋아요
 const likeClub = async (req, res) => {
   try {
     const { clubId } = req.body;
@@ -150,6 +154,7 @@ const likeClub = async (req, res) => {
   }
 };
 
+// 상위 랭크 동아리
 const ranking = async (req, res) => {
   try {
     const rankClub = await Club.find({}).then((club) => {
@@ -164,6 +169,7 @@ const ranking = async (req, res) => {
   }
 };
 
+// 현재 모집 중인 동아리
 const recruitNow = async (req, res) => {
   try {
     const recruitClub = await Club.find({
@@ -175,12 +181,43 @@ const recruitNow = async (req, res) => {
       });
       return recruitClubs;
     });
-    return res.status(statusCode.CREATED).send(util.success(statusCode.OK, recruitClub));
+    return res.status(statusCode.OK).send(util.success(statusCode.OK, recruitClub));
   } catch {
     return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR));
   }
 };
 
+// 내가 등록한 동아리
+const myRegisterClub = async (req, res) => {
+  try {
+    const userId = req.decoded.id; // 현재 로그인한 사람의 _id
+    const myRegisteredClub = await Club.find({ writer: userId }).then((myClub) => {
+      const registeredClub = myClub.map((club) => {
+        return [club.representativeImage, club.introduceContent, club.registerDate];
+      });
+      return registeredClub;
+    });
+    return res.status(statusCode.OK).send(util.success(statusCode.OK, myRegisteredClub));
+  } catch {
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// 내가 좋아요 한 동아리
+const myLikeClub = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const likedClub = await User.find({ _id: userId }).then((user) => {
+      const liked = user.map((club) => {
+        return club.likesOfClub;
+      });
+      return liked;
+    });
+    return res.status(statusCode.OK).send(util.success(statusCode.OK, likedClub));
+  } catch {
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR));
+  }
+};
 const getFilePath = async (req, file) => {
   if (req.files[file]) {
     return req.files[file][0].path;
@@ -195,4 +232,6 @@ module.exports = {
   likeClub,
   ranking,
   recruitNow,
+  myRegisterClub,
+  myLikeClub,
 };
