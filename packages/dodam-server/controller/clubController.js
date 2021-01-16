@@ -157,12 +157,14 @@ const likeClub = async (req, res) => {
 // 상위 랭크 동아리
 const ranking = async (req, res) => {
   try {
-    const rankClub = await Club.find({}).then((club) => {
-      const clubs = club.map((rank) => {
-        return [rank.name, rank.representativeImage];
+    const rankClub = await Club.find({ likes: { $gt: 0 } })
+      .sort({ likes: -1 })
+      .then((club) => {
+        const clubs = club.map((rank) => {
+          return [rank.name, rank.representativeImage];
+        });
+        return clubs;
       });
-      return clubs;
-    });
     return res.status(statusCode.CREATED).send(util.success(statusCode.OK, rankClub));
   } catch {
     return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR));
